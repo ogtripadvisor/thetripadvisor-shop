@@ -1,0 +1,738 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --pink: #ff2d95;
+  --purple: #7b2ff7;
+  --cyan: #00e5ff;
+  --green: #39ff14;
+  --amber: #ffb800;
+  --card-bg: rgba(10, 0, 18, 0.72);
+  --card-border: rgba(255, 255, 255, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #f5f0ff;
+  overflow-x: hidden;
+}
+
+/* ---------- Animated rainbow background ---------- */
+
+body {
+  background: linear-gradient(
+    115deg,
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--green),
+    var(--amber),
+    var(--pink)
+  );
+  background-size: 400% 400%;
+  animation: rainbow-shift 18s ease infinite;
+}
+
+@keyframes rainbow-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Darkens the rainbow uniformly so text placed directly on the
+   background (hero tagline, section headings, etc.) stays readable
+   no matter which bright colour the gradient is cycling through. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 0, 12, 0.4);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.display-heading,
+.brand-logo,
+.price-tag {
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Floating mushroom layer ---------- */
+/* Fixes the original bug: mushrooms had no per-instance
+   position, so all 3 spans stacked on top of each other. */
+
+.mushroom-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.mushroom {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  font-size: var(--size);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+  animation:
+    mushroom-float var(--duration) ease-in-out infinite,
+    mushroom-glow calc(var(--duration) * 0.6) ease-in-out infinite,
+    mushroom-hue calc(var(--duration) * 1.4) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform, filter;
+}
+
+@keyframes mushroom-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-28px) rotate(8deg);
+  }
+}
+
+@keyframes mushroom-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) hue-rotate(0deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.9)) hue-rotate(0deg);
+  }
+}
+
+@keyframes mushroom-hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* ---------- Product grid & cards ---------- */
+
+.product-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.product-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.product-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card__body {
+  padding: 1rem 1.1rem 1.25rem;
+  position: relative;
+  z-index: 2;
+  min-height: 11rem;
+}
+
+.product-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.product-card__meta {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #d8ccec;
+  margin: 0 0 0.6rem;
+}
+
+.back-print-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 184, 0, 0.18);
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+}
+
+.price-tag {
+  font-size: 1.1rem;
+  color: var(--amber);
+}
+
+.view-back-toggle {
+  display: block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #f5f0ff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.view-back-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- Buy now button ---------- */
+
+.buy-now-button {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1a0a00;
+  background: var(--amber);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.buy-now-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.buy-now-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.checkout-error-text {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0;
+}
+
+/* ---------- Checkout success / cancel pages ---------- */
+
+.checkout-result {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.checkout-result__emoji {
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Smoke puff hover effect ---------- */
+/* Single animation only (no competing `transition`), so the
+   keyframes fully control opacity/scale/position on hover. */
+
+.smoke-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.smoke-puff {
+  position: absolute;
+  bottom: 8%;
+  left: var(--puff-x);
+  width: var(--puff-size, 46px);
+  height: var(--puff-size, 46px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.5) 40%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  opacity: 0;
+  filter: blur(1px);
+  transform: scale(0.4) translate(0, 0);
+}
+
+/* Sideways drift and rise distance are now set inline per puff
+   (see SmokeLayer.tsx) so any number of puffs works correctly,
+   not just the first 5. */
+
+.product-card:hover .smoke-puff,
+.spotlight-image-wrap:hover .smoke-puff {
+  animation: smoke-drift 1.4s ease-out forwards;
+  animation-delay: var(--puff-delay);
+}
+
+@keyframes smoke-drift {
+  0% {
+    opacity: 0;
+    filter: blur(1px);
+    transform: scale(0.4) translate(0, 0);
+  }
+  12% {
+    opacity: 0.85;
+  }
+  55% {
+    opacity: 0.55;
+    filter: blur(4px);
+    transform: scale(1.5) translate(calc(var(--drift-x) * 0.6), calc(var(--puff-travel, -120px) * 0.46));
+  }
+  100% {
+    opacity: 0;
+    filter: blur(9px);
+    transform: scale(2.4) translate(var(--drift-x), var(--puff-travel, -120px));
+  }
+}
+
+/* ---------- Accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .mushroom,
+  .smoke-puff,
+  .product-card {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Nav ---------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(8, 0, 14, 0.55);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 24px rgba(255, 45, 149, 0.25);
+}
+
+.site-nav__logo {
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, var(--pink), var(--amber), var(--cyan));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-shift 6s linear infinite;
+}
+
+.site-nav__links {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.site-nav__links a {
+  position: relative;
+  color: #f5f0ff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.site-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), var(--cyan));
+  transition: width 0.25s ease;
+}
+
+.site-nav__links a:hover {
+  opacity: 0.75;
+}
+
+.site-nav__links a:hover::after {
+  width: 100%;
+}
+
+/* ---------- Hero (home page) ---------- */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 4.5rem 1.5rem 2.5rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.hero__title {
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  margin: 0 0 1.25rem;
+  line-height: 1;
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--green),
+    var(--amber),
+    var(--pink)
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-shift 8s linear infinite;
+  filter: drop-shadow(0 0 24px rgba(255, 45, 149, 0.45))
+    drop-shadow(0 0 48px rgba(0, 229, 255, 0.25));
+}
+
+.hero__tagline {
+  display: inline-block;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  padding: 0.9rem 1.5rem;
+  margin: 0 0 2rem;
+  background: rgba(8, 0, 16, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- Marquee ticker ---------- */
+
+.ticker {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 0.85rem 0;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--green),
+    var(--amber),
+    var(--pink)
+  );
+  background-size: 300% auto;
+  animation: rainbow-shift 10s linear infinite;
+  transform: rotate(-1deg);
+  box-shadow: 0 0 30px rgba(255, 45, 149, 0.35);
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 22s linear infinite;
+}
+
+.ticker__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.5rem;
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  color: #0a0014;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---------- CTA buttons ---------- */
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.cta-button--primary {
+  background: var(--amber);
+  color: #1a0a00;
+  box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.6);
+  animation: cta-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.45); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 184, 0, 0); }
+}
+
+.cta-button--secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f5f0ff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cta-button--outline {
+  background: transparent;
+  color: #f5f0ff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- Featured drop spotlight ---------- */
+
+.spotlight {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  max-width: 340px;
+  margin: 0 auto 2.5rem;
+}
+
+@media (min-width: 720px) {
+  .spotlight {
+    max-width: 100%;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    text-align: left;
+    gap: 3rem;
+  }
+}
+
+.spotlight__badge {
+  display: inline-block;
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.spotlight__name {
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.spotlight__desc {
+  color: #d8ccec;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+}
+
+.spotlight-image-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.spotlight-image-wrap__img {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.spotlight-image-wrap:hover .spotlight-image-wrap__img {
+  transform: scale(1.02);
+}
+
+/* ---------- Home page sections ---------- */
+
+.home-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.section-heading {
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0 0 1.75rem;
+  text-shadow: 0 0 20px rgba(255, 45, 149, 0.35);
+}
+
+/* ---------- Monumental collection title ("50 Shades of Grade") ---------- */
+
+.collection-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 3vw, 2.5rem);
+  min-height: 9rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.collection-title__leaf {
+  flex-shrink: 0;
+  width: clamp(3.5rem, 9vw, 6.5rem);
+  height: auto;
+  opacity: 0.5;
+  color: var(--green);
+  filter: drop-shadow(0 0 14px rgba(57, 255, 20, 0.4));
+}
+
+.collection-title__leaf--left {
+  transform: rotate(-18deg);
+}
+
+.collection-title__leaf--right {
+  transform: rotate(18deg) scaleX(-1);
+}
+
+.collection-title__text {
+  position: relative;
+  z-index: 1;
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    var(--green),
+    var(--cyan),
+    var(--amber)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-shift 7s linear infinite;
+  filter: drop-shadow(0 0 26px rgba(57, 255, 20, 0.35));
+}
+
+.wave-divider {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 60px;
+  margin-top: -1px;
+}
+
+.product-grid--preview {
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.home-section__cta {
+  margin-top: 1rem;
+}
+
+.home-section--music-teaser {
+  padding-bottom: 4rem;
+}
+
+/* ---------- Shop / Music page titles ---------- */
+
+.page-title {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.status-text {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.status-text--error {
+  color: #ff6b6b;
+}
+
+/* ---------- Music page ---------- */
+
+.spotify-embed-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.streaming-links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0 1.5rem 4rem;
+}
