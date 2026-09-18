@@ -736,3 +736,59 @@ body::before {
   flex-wrap: wrap;
   padding: 0 1.5rem 4rem;
 }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.site-footer__tagline {
+  font-family: "Bungee", "Inter", system-ui, sans-serif;
+  font-size: 0.95rem;
+  margin: 0 0 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.site-footer__socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.site-footer__icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f5f0ff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.site-footer__icon-link:hover {
+  transform: translateY(-3px);
+  color: var(--amber);
+  box-shadow: 0 0 18px rgba(255, 184, 0, 0.4);
+}
+
+.site-footer__icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.site-footer__copyright {
+  font-size: 0.8rem;
+  color: #d8ccec;
+  margin: 0;
+}

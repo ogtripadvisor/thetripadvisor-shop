@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import FloatingMushrooms from "@/app/components/FloatingMushrooms";
 import Nav from "@/app/components/Nav";
+import Footer from "@/app/components/Footer";
 
 export const metadata: Metadata = {
   title: "The TripAdvisor",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <FloatingMushrooms />
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );
