@@ -61,33 +61,35 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div
-      className={`product-card${isSmoking ? " is-smoking" : ""}`}
-      onClick={triggerSmoke}
-    >
-      <SmokeLayer />
+    <div className="product-card">
+      <div
+        className={`product-card__image-wrap${isSmoking ? " is-smoking" : ""}`}
+        onClick={triggerSmoke}
+      >
+        <SmokeLayer count={6} minSize={40} maxSize={78} travel={140} />
 
-      {displayedImage ? (
-        <img
-          className="product-card__image"
-          src={displayedImage}
-          alt={`${product.design} T-shirt (${product.color})${showingBack ? " — back" : ""}`}
-        />
-      ) : (
-        <div
-          className="product-card__image"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(255,255,255,0.06)",
-            fontSize: "0.85rem",
-            opacity: 0.6,
-          }}
-        >
-          Artwork coming soon
-        </div>
-      )}
+        {displayedImage ? (
+          <img
+            className="product-card__image"
+            src={displayedImage}
+            alt={`${product.design} T-shirt (${product.color})${showingBack ? " — back" : ""}`}
+          />
+        ) : (
+          <div
+            className="product-card__image"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "rgba(255,255,255,0.06)",
+              fontSize: "0.85rem",
+              opacity: 0.6,
+            }}
+          >
+            Artwork coming soon
+          </div>
+        )}
+      </div>
 
       <div className="product-card__body">
         {product.hasBackPrint && (

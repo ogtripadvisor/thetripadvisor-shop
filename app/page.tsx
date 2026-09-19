@@ -148,7 +148,7 @@ export default function Home() {
                 className={`spotlight-image-wrap${isSpotlightSmoking ? " is-smoking" : ""}`}
                 onClick={triggerSpotlightSmoke}
               >
-                <SmokeLayer count={10} minSize={70} maxSize={150} travel={220} />
+                <SmokeLayer count={10} minSize={85} maxSize={175} travel={250} />
                 <img
                   src={spotlightProduct.imageUrl}
                   alt={spotlightProduct.design}

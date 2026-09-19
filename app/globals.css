@@ -152,6 +152,11 @@ body::before {
   border-color: rgba(255, 255, 255, 0.35);
 }
 
+.product-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
 .product-card__image {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -285,9 +290,9 @@ body::before {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.5) 40%,
-    rgba(255, 255, 255, 0) 72%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.65) 45%,
+    rgba(255, 255, 255, 0) 74%
   );
   opacity: 0;
   filter: blur(1px);
@@ -298,8 +303,8 @@ body::before {
    (see SmokeLayer.tsx) so any number of puffs works correctly,
    not just the first 5. */
 
-.product-card:hover .smoke-puff,
-.product-card.is-smoking .smoke-puff,
+.product-card__image-wrap:hover .smoke-puff,
+.product-card__image-wrap.is-smoking .smoke-puff,
 .spotlight-image-wrap:hover .smoke-puff,
 .spotlight-image-wrap.is-smoking .smoke-puff {
   animation: smoke-drift 1.4s ease-out forwards;
@@ -313,10 +318,10 @@ body::before {
     transform: scale(0.4) translate(0, 0);
   }
   12% {
-    opacity: 0.85;
+    opacity: 1;
   }
   55% {
-    opacity: 0.55;
+    opacity: 0.7;
     filter: blur(4px);
     transform: scale(1.5) translate(calc(var(--drift-x) * 0.6), calc(var(--puff-travel, -120px) * 0.46));
   }
