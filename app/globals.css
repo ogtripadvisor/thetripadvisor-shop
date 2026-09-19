@@ -299,7 +299,9 @@ body::before {
    not just the first 5. */
 
 .product-card:hover .smoke-puff,
-.spotlight-image-wrap:hover .smoke-puff {
+.product-card.is-smoking .smoke-puff,
+.spotlight-image-wrap:hover .smoke-puff,
+.spotlight-image-wrap.is-smoking .smoke-puff {
   animation: smoke-drift 1.4s ease-out forwards;
   animation-delay: var(--puff-delay);
 }

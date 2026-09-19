@@ -21,10 +21,19 @@ export default function ProductCard({ product }: { product: Product }) {
   const [showingBack, setShowingBack] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const [isSmoking, setIsSmoking] = useState(false);
 
   const canToggle = product.hasBackPrint && product.imageUrl && product.backImageUrl;
   const displayedImage = showingBack && canToggle ? product.backImageUrl : product.imageUrl;
   const soldOut = product.stock <= 0;
+
+  // Hover doesn't exist on touchscreens, so tapping the card also
+  // triggers the smoke puffs directly (in addition to :hover, which
+  // still covers desktop mouse users).
+  const triggerSmoke = () => {
+    setIsSmoking(true);
+    window.setTimeout(() => setIsSmoking(false), 1400);
+  };
 
   const handleBuyNow = async () => {
     setCheckoutError(null);
@@ -52,7 +61,10 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="product-card">
+    <div
+      className={`product-card${isSmoking ? " is-smoking" : ""}`}
+      onClick={triggerSmoke}
+    >
       <SmokeLayer />
 
       {displayedImage ? (

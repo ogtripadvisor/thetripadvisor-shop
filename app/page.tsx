@@ -32,6 +32,14 @@ const TICKER_PHRASES = [
 export default function Home() {
   const [spotlightProduct, setSpotlightProduct] = useState<Product | null>(null);
   const [gridProducts, setGridProducts] = useState<Product[]>([]);
+  const [isSpotlightSmoking, setIsSpotlightSmoking] = useState(false);
+
+  // Hover doesn't exist on touchscreens, so tapping the spotlight image
+  // also triggers the smoke puffs directly (alongside :hover for desktop).
+  const triggerSpotlightSmoke = () => {
+    setIsSpotlightSmoking(true);
+    window.setTimeout(() => setIsSpotlightSmoking(false), 1400);
+  };
 
   useEffect(() => {
     const toProduct = (row: ProductRow): Product => ({
@@ -108,9 +116,9 @@ export default function Home() {
           The TripAdvisor
         </h1>
         <p className="hero__tagline">
-          Music, merch, and good vibes only. Cartoon cannabis tees and sounds
-          built for the same trip — grab a shirt, press play, and spread the
-          positivity.
+          Music, merch, and good vibes only. Home of the 50 Shades of Grade
+          clothing line and sounds built for the same trip — grab a shirt,
+          press play, and spread the positivity.
         </p>
         <div className="hero__actions">
           <Link href="/shop" className="cta-button cta-button--primary">
@@ -136,7 +144,10 @@ export default function Home() {
         <section className="home-section">
           <div className="spotlight">
             {spotlightProduct.imageUrl ? (
-              <div className="spotlight-image-wrap">
+              <div
+                className={`spotlight-image-wrap${isSpotlightSmoking ? " is-smoking" : ""}`}
+                onClick={triggerSpotlightSmoke}
+              >
                 <SmokeLayer count={10} minSize={70} maxSize={150} travel={220} />
                 <img
                   src={spotlightProduct.imageUrl}
