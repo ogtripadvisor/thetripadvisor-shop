@@ -6,6 +6,35 @@ export default function MusicPage() {
         Stream The TripAdvisor wherever you listen.
       </p>
 
+      <section className="coming-soon">
+        <span className="coming-soon__badge">
+          <span className="coming-soon__dot" aria-hidden="true" />
+          In the studio
+        </span>
+        <h2 className="coming-soon__title">New music coming soon</h2>
+        <p className="coming-soon__text">
+          Fresh tracks are on the way. Follow along so you&apos;re first to hear them.
+        </p>
+        <div className="coming-soon__links">
+          <a
+            href="https://www.instagram.com/ogtripadvisor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-button cta-button--outline"
+          >
+            Follow on Instagram
+          </a>
+          <a
+            href="https://www.tiktok.com/@ogtripadvisor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-button cta-button--outline"
+          >
+            Follow on TikTok
+          </a>
+        </div>
+      </section>
+
       <div className="spotify-embed-wrap">
         <iframe
           style={{ borderRadius: '16px' }}
