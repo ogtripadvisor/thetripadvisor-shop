@@ -87,6 +87,8 @@ export default function ProductCard({ product }: { product: Product }) {
           <img
             className="product-card__image"
             src={displayedImage}
+            loading="lazy"
+            decoding="async"
             alt={`${product.design} T-shirt (${product.color}) — ${current?.label ?? "Front"}`}
           />
         ) : (
