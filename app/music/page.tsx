@@ -1,3 +1,10 @@
+import Countdown from '@/app/components/Countdown';
+
+// Change this if the Halloween Special drops at a different time
+const HALLOWEEN_RELEASE = '2026-10-31T00:00:00Z';
+
+const ALBUM_TRACKS = ['S.W.R', 'Hurricane', 'Halloween Special'];
+
 export default function MusicPage() {
   return (
     <main style={{ textAlign: 'center' }}>
@@ -6,21 +13,23 @@ export default function MusicPage() {
         Stream The TripAdvisor wherever you listen.
       </p>
 
-      <section className="coming-soon">
-        <span className="coming-soon__badge">
-          <span className="coming-soon__dot" aria-hidden="true" />
-          In the studio
+      {/* Halloween Special feature */}
+      <section className="halloween">
+        <span className="halloween__badge">
+          <span className="halloween__dot" aria-hidden="true" />
+          New single
         </span>
-        <h2 className="coming-soon__title">New music coming soon</h2>
-        <p className="coming-soon__text">
-          Fresh tracks are on the way. Follow along so you&apos;re first to hear them.
-        </p>
-        <div className="coming-soon__links">
+        <h2 className="display-heading halloween__title">Halloween Special</h2>
+        <p className="halloween__sub">Dropping this Halloween</p>
+
+        <Countdown target={HALLOWEEN_RELEASE} />
+
+        <div className="halloween__links">
           <a
             href="https://www.instagram.com/ogtripadvisor"
             target="_blank"
             rel="noopener noreferrer"
-            className="cta-button cta-button--outline"
+            className="cta-button cta-button--primary"
           >
             Follow on Instagram
           </a>
@@ -33,6 +42,31 @@ export default function MusicPage() {
             Follow on TikTok
           </a>
         </div>
+      </section>
+
+      {/* Mr. Medicinal album showcase */}
+      <section className="album">
+        <span className="album__label">Debut album · Coming soon</span>
+        <h2 className="display-heading album__title">Mr. Medicinal</h2>
+        <p className="album__text">
+          The full project from The TripAdvisor. A first taste of what&apos;s on it:
+        </p>
+
+        <ol className="album__tracks">
+          {ALBUM_TRACKS.map((track, i) => (
+            <li
+              key={track}
+              className={`album__track${track === 'Halloween Special' ? ' album__track--featured' : ''}`}
+            >
+              <span className="album__num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="album__name">{track}</span>
+            </li>
+          ))}
+          <li className="album__track album__track--more">
+            <span className="album__num">··</span>
+            <span className="album__name">More to be revealed</span>
+          </li>
+        </ol>
       </section>
 
       <div className="spotify-embed-wrap">
@@ -57,7 +91,6 @@ export default function MusicPage() {
         >
           Open in Spotify
         </a>
-
         <a
           href="https://music.youtube.com/@ogtripadvisor"
           target="_blank"

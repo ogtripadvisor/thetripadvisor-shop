@@ -856,3 +856,207 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .coming-soon__dot { animation: none; }
 }
+
+/* ---------- Music: Halloween Special feature ---------- */
+.halloween {
+  position: relative;
+  max-width: 600px;
+  margin: 1.5rem auto 2rem;
+  padding: 2rem 1.5rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 106, 0, 0.18), transparent 60%),
+    radial-gradient(circle at 50% 120%, rgba(138, 43, 226, 0.22), transparent 60%),
+    rgba(10, 6, 14, 0.75);
+  border: 1px solid rgba(255, 140, 0, 0.35);
+  box-shadow:
+    0 0 50px rgba(255, 106, 0, 0.15),
+    0 0 90px rgba(138, 43, 226, 0.12);
+  animation: halloween-glow 4s ease-in-out infinite;
+}
+
+@keyframes halloween-glow {
+  0%, 100% { box-shadow: 0 0 50px rgba(255, 106, 0, 0.15), 0 0 90px rgba(138, 43, 226, 0.12); }
+  50% { box-shadow: 0 0 65px rgba(255, 106, 0, 0.25), 0 0 110px rgba(138, 43, 226, 0.2); }
+}
+
+.halloween__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff8c1a;
+  border: 1px solid rgba(255, 140, 26, 0.45);
+  background: rgba(255, 140, 26, 0.08);
+}
+
+.halloween__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff8c1a;
+  animation: halloween-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes halloween-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 140, 26, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(255, 140, 26, 0); }
+}
+
+.halloween__title {
+  margin: 0.9rem 0 0.3rem;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  line-height: 1.05;
+  background: linear-gradient(180deg, #ffb347 0%, #ff6a00 55%, #b44cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.halloween__sub {
+  margin: 0 0 1.3rem;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.halloween__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 72px;
+}
+
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+  padding: 0.55rem 0.4rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #ffb347;
+}
+
+.countdown__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.countdown__out {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffb347;
+  margin: 0;
+}
+
+/* ---------- Music: Mr. Medicinal album ---------- */
+.album {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  padding: 2rem 1.5rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(80, 200, 120, 0.14), transparent 55%),
+    rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(80, 200, 120, 0.3);
+}
+
+.album__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6fe39a;
+}
+
+.album__title {
+  margin: 0.6rem 0 0.4rem;
+  font-size: clamp(2rem, 8vw, 3rem);
+  line-height: 1.05;
+}
+
+.album__text {
+  margin: 0 auto 1.3rem;
+  max-width: 420px;
+  opacity: 0.8;
+}
+
+.album__tracks {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 380px;
+  text-align: left;
+}
+
+.album__track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.album__track:last-child {
+  border-bottom: none;
+}
+
+.album__num {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  opacity: 0.5;
+  min-width: 1.6rem;
+}
+
+.album__name {
+  font-weight: 600;
+}
+
+.album__track--featured {
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255, 106, 0, 0.16), rgba(138, 43, 226, 0.12));
+  border-bottom-color: transparent;
+}
+
+.album__track--featured .album__name {
+  color: #ffb347;
+}
+
+.album__track--more .album__name {
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+@media (max-width: 420px) {
+  .countdown__unit { min-width: 56px; }
+  .countdown__value { font-size: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halloween, .halloween__dot { animation: none; }
+}
