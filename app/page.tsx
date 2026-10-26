@@ -7,6 +7,14 @@ import ProductCard, { Product } from '@/app/components/ProductCard';
 import SmokeLayer from '@/app/components/SmokeLayer';
 import CannabisLeaf from '@/app/components/CannabisLeaf';
 
+// Keep this the same as the list at the top of the shop page.
+// Anything named here is hidden from the home page grid.
+const COMING_SOON = [
+  'Gelato',
+  '50 Shades of Grade Mandem Edition',
+  'Grapefruit Diesel',
+];
+
 type ProductRow = {
   id: string;
   name: string;
@@ -16,6 +24,7 @@ type ProductRow = {
   price: number;
   image_url: string | null;
   back_image_url: string | null;
+  tag_image_url: string | null;
   has_back_print: boolean;
   stock: number;
   description: string;
@@ -51,6 +60,7 @@ export default function Home() {
       price: row.price,
       imageUrl: row.image_url,
       backImageUrl: row.back_image_url,
+      tagImageUrl: row.tag_image_url,
       hasBackPrint: row.has_back_print,
       stock: row.stock,
       description: row.description,
@@ -86,7 +96,9 @@ export default function Home() {
         return;
       }
 
-      const rows = (allRows as ProductRow[]) || [];
+      const rows = ((allRows as ProductRow[]) || []).filter(
+        (r) => !COMING_SOON.includes(r.design),
+      );
       const seenDesigns = new Set<string>();
       const alternating: Product[] = [];
 
@@ -108,6 +120,9 @@ export default function Home() {
 
     fetchHomeData();
   }, []);
+
+  // Grid designs + the spotlight design
+  const totalDesigns = gridProducts.length + (spotlightProduct ? 1 : 0);
 
   return (
     <main>
@@ -186,7 +201,7 @@ export default function Home() {
         </div>
         <div className="home-section__cta">
           <Link href="/shop" className="cta-button cta-button--outline">
-            View all 11 designs
+            {totalDesigns > 0 ? `View all ${totalDesigns} designs` : 'View all designs'}
           </Link>
         </div>
       </section>
