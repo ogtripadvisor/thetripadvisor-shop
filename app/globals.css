@@ -1343,3 +1343,41 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .soon__title, .soon__mystery { animation: none; }
 }
+
+/* ---------- Coming soon: floating question marks ---------- */
+.soon__mystery {
+  position: relative;
+  animation: none;
+  overflow: hidden;
+}
+
+.soon__mark-main {
+  position: relative;
+  z-index: 1;
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: #ffd700;
+  text-shadow: 0 0 24px rgba(255, 215, 0, 0.45);
+  animation: soon-float 3s ease-in-out infinite;
+}
+
+.soon__mark {
+  position: absolute;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.6;
+  pointer-events: none;
+  transform: rotate(var(--r));
+  animation-name: soon-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes soon-drift {
+  0%, 100% { transform: translateY(0) rotate(var(--r)); opacity: 0.45; }
+  50% { transform: translateY(-12px) rotate(calc(var(--r) * -1)); opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soon__mark, .soon__mark-main { animation: none; }
+}
