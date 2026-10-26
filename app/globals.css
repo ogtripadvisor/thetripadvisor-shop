@@ -1381,3 +1381,58 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .soon__mark, .soon__mark-main { animation: none; }
 }
+
+/* ---------- Coming soon: bold gold upgrade ---------- */
+.soon__label {
+  color: #ffe680;
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid #ffd700;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+  opacity: 1;
+}
+
+.soon__title {
+  opacity: 1;
+  font-size: clamp(2.6rem, 10vw, 4rem);
+  background: linear-gradient(110deg, #ffd700 0%, #fff6c8 25%, #ffd700 45%, #ffb800 70%, #ffd700 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.soon__card {
+  border: 1px solid rgba(255, 215, 0, 0.7);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.18);
+}
+
+.soon__name {
+  margin: 1rem 0 0.3rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  opacity: 1;
+  background: linear-gradient(110deg, #ffd700 0%, #fff6c8 30%, #ffd700 55%, #ffb800 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: soon-shimmer 5s linear infinite;
+}
+
+.soon__ribbon {
+  bottom: 1rem;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1a1200;
+  background: linear-gradient(90deg, #ffe680, #ffd700, #ffb800);
+  border: 1px solid #fff6c8;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soon__name { animation: none; }
+}

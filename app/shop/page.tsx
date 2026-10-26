@@ -8,8 +8,8 @@ import ProductCard, { Product } from '@/app/components/ProductCard';
 // To release one, just delete its name from this list.
 const COMING_SOON = [
   'Gelato',
-  'Grapefruit Diesel',
   '50 Shades of Grade Mandem Edition',
+  'Grapefruit Diesel',
 ];
 
 // Little floating question marks around the big one
