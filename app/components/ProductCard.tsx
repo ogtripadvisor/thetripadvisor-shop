@@ -12,19 +12,34 @@ export type Product = {
   price: number;
   imageUrl: string | null;
   backImageUrl: string | null;
+  tagImageUrl?: string | null;
   hasBackPrint: boolean;
   stock: number;
   description: string;
 };
 
+type View = { key: string; label: string; url: string };
+
 export default function ProductCard({ product }: { product: Product }) {
-  const [showingBack, setShowingBack] = useState(false);
+  const [activeView, setActiveView] = useState(0);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [isSmoking, setIsSmoking] = useState(false);
 
-  const canToggle = product.hasBackPrint && product.imageUrl && product.backImageUrl;
-  const displayedImage = showingBack && canToggle ? product.backImageUrl : product.imageUrl;
+  // Build the list of photos this shirt has: front, back (if it has a back print), tag
+  const views: View[] = [];
+  if (product.imageUrl) {
+    views.push({ key: "front", label: "Front", url: product.imageUrl });
+  }
+  if (product.hasBackPrint && product.backImageUrl) {
+    views.push({ key: "back", label: "Back", url: product.backImageUrl });
+  }
+  if (product.tagImageUrl) {
+    views.push({ key: "tag", label: "Tag", url: product.tagImageUrl });
+  }
+
+  const current = views[activeView] ?? views[0];
+  const displayedImage = current ? current.url : null;
   const soldOut = product.stock <= 0;
 
   // Hover doesn't exist on touchscreens, so tapping the card also
@@ -72,7 +87,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <img
             className="product-card__image"
             src={displayedImage}
-            alt={`${product.design} T-shirt (${product.color})${showingBack ? " — back" : ""}`}
+            alt={`${product.design} T-shirt (${product.color}) — ${current?.label ?? "Front"}`}
           />
         ) : (
           <div
@@ -118,14 +133,21 @@ export default function ProductCard({ product }: { product: Product }) {
           <p className="checkout-error-text">{checkoutError}</p>
         )}
 
-        {canToggle && (
-          <button
-            type="button"
-            className="view-back-toggle"
-            onClick={() => setShowingBack((v) => !v)}
-          >
-            {showingBack ? "View front" : "View back"}
-          </button>
+        {views.length > 1 && (
+          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+            {views.map((view, i) => (
+              <button
+                key={view.key}
+                type="button"
+                className="view-back-toggle"
+                aria-pressed={i === activeView}
+                style={{ opacity: i === activeView ? 1 : 0.55 }}
+                onClick={() => setActiveView(i)}
+              >
+                {view.label}
+              </button>
+            ))}
+          </div>
         )}
       </div>
     </div>

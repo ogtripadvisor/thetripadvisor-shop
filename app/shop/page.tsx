@@ -13,6 +13,7 @@ type ProductRow = {
   price: number;
   image_url: string | null;
   back_image_url: string | null;
+  tag_image_url: string | null;
   has_back_print: boolean;
   stock: number;
   description: string;
@@ -47,6 +48,7 @@ export default function ShopPage() {
         price: row.price,
         imageUrl: row.image_url,
         backImageUrl: row.back_image_url,
+        tagImageUrl: row.tag_image_url,
         hasBackPrint: row.has_back_print,
         stock: row.stock,
         description: row.description,
