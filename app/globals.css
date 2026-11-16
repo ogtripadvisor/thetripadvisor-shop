@@ -1527,3 +1527,126 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .soon::before, .soon::after { animation: none; }
 }
+
+/* ---------- Music: Nova Vita (new life, sunrise colours) ---------- */
+.nova {
+  position: relative;
+  max-width: 620px;
+  margin: 1.5rem auto 2rem;
+  padding: 2.2rem 1.5rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 110%, rgba(255, 214, 120, 0.3), transparent 60%),
+    linear-gradient(170deg, #062a2a 0%, #0d4a43 50%, #123a52 100%);
+  border: 1px solid rgba(124, 242, 196, 0.5);
+  box-shadow:
+    0 0 45px rgba(124, 242, 196, 0.18),
+    0 0 90px rgba(255, 214, 120, 0.12);
+}
+
+.nova__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7cf2c4;
+  border: 1px solid rgba(124, 242, 196, 0.6);
+  background: rgba(124, 242, 196, 0.1);
+}
+
+.nova__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7cf2c4;
+  animation: nova-pulse 2s ease-in-out infinite;
+}
+
+@keyframes nova-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 242, 196, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(124, 242, 196, 0); }
+}
+
+.nova__title {
+  margin: 0.9rem 0 0.2rem;
+  font-size: clamp(2.6rem, 11vw, 4rem);
+  line-height: 1.05;
+  background: linear-gradient(180deg, #ffe29a 0%, #ffd06b 35%, #7cf2c4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.nova__latin {
+  margin: 0 0 1.2rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: #ffe29a;
+}
+
+.nova__text {
+  max-width: 460px;
+  margin: 0 auto 0.9rem;
+  color: #e8f6f0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.nova .countdown {
+  margin-top: 1.2rem;
+}
+
+.nova .countdown__value,
+.nova .countdown__out {
+  color: #7cf2c4;
+}
+
+.nova__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+.nova__support {
+  max-width: 420px;
+  margin: 1.6rem auto 0;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 226, 154, 0.35);
+  color: #e8f6f0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.nova__support p {
+  margin: 0.25rem 0;
+}
+
+.nova__support-title {
+  font-weight: 700;
+  color: #ffe29a;
+}
+
+.nova__support a {
+  color: #7cf2c4;
+  font-weight: 700;
+}
+
+/* Halloween Special player */
+.halloween__embed {
+  max-width: 480px;
+  margin: 0.5rem auto 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nova__dot { animation: none; }
+}

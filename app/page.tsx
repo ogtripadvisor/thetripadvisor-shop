@@ -10,8 +10,8 @@ import CannabisLeaf from '@/app/components/CannabisLeaf';
 // Keep this the same as the list at the top of the shop page.
 // Anything named here is hidden from the home page grid.
 const COMING_SOON = [
-  'Gelato',
   '50 Shades of Grade Mandem Edition',
+  'Gelato',
   'Grapefruit Diesel',
   'Zkittlez',
 ];
