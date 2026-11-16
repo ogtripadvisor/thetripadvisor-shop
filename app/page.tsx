@@ -13,7 +13,10 @@ const COMING_SOON = [
   'Gelato',
   '50 Shades of Grade Mandem Edition',
   'Grapefruit Diesel',
+  'Zkittlez',
 ];
+
+const HIDDEN = ['Skittlez'];
 
 type ProductRow = {
   id: string;
@@ -97,7 +100,7 @@ export default function Home() {
       }
 
       const rows = ((allRows as ProductRow[]) || []).filter(
-        (r) => !COMING_SOON.includes(r.design),
+        (r) => !COMING_SOON.includes(r.design) && !HIDDEN.includes(r.design),
       );
       const seenDesigns = new Set<string>();
       const alternating: Product[] = [];

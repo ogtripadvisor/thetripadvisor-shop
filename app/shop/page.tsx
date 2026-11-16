@@ -10,7 +10,11 @@ const COMING_SOON = [
   'Gelato',
   '50 Shades of Grade Mandem Edition',
   'Grapefruit Diesel',
+  'Zkittlez',
 ];
+
+// Designs hidden from the store completely (not shown as coming soon)
+const HIDDEN = ['Skittlez'];
 
 // Little floating question marks around the big one
 const FLOATING_MARKS = [
@@ -81,7 +85,9 @@ export default function ShopPage() {
     fetchProducts();
   }, []);
 
-  const available = products.filter((p) => !COMING_SOON.includes(p.design));
+    const available = products.filter(
+    (p) => !COMING_SOON.includes(p.design) && !HIDDEN.includes(p.design),
+  );
 
   return (
     <main>
