@@ -40,6 +40,10 @@ const TICKER_PHRASES = [
   'HIGH VIBES ONLY',
   'THE TRIPADVISOR',
 ];
+// Sends photos through Next.js's image optimiser so they load much faster
+function optimised(url: string, width: number) {
+  return `/_next/image?url=${encodeURIComponent(url)}&w=${width}&q=75`;
+}
 
 export default function Home() {
   const [spotlightProduct, setSpotlightProduct] = useState<Product | null>(null);
@@ -168,7 +172,7 @@ export default function Home() {
               >
                 <SmokeLayer count={10} minSize={85} maxSize={175} travel={250} />
                 <img
-                  src={spotlightProduct.imageUrl}
+                  src={optimised(spotlightProduct.imageUrl, 1080)}
                   alt={spotlightProduct.design}
                   className="spotlight-image-wrap__img"
                 />
