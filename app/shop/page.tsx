@@ -4,11 +4,11 @@ import { useEffect, useState, CSSProperties } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import ProductCard, { Product } from '@/app/components/ProductCard';
 
-// T-shirts shown in "Coming soon" instead of the shop.
+// T-shirts shown in "Coming soon" instead of the shop, in this order.
 // To release one, just delete its name from this list.
 const COMING_SOON = [
-  'Gelato',
   '50 Shades of Grade Mandem Edition',
+  'Gelato',
   'Grapefruit Diesel',
   'Zkittlez',
 ];
@@ -85,7 +85,7 @@ export default function ShopPage() {
     fetchProducts();
   }, []);
 
-    const available = products.filter(
+  const available = products.filter(
     (p) => !COMING_SOON.includes(p.design) && !HIDDEN.includes(p.design),
   );
 
