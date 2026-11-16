@@ -40,9 +40,11 @@ const TICKER_PHRASES = [
   'HIGH VIBES ONLY',
   'THE TRIPADVISOR',
 ];
-// Sends photos through Next.js's image optimiser so they load much faster
+
+// Image optimiser is switched off for now: photos load directly from Supabase
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function optimised(url: string, width: number) {
-  return `/_next/image?url=${encodeURIComponent(url)}&w=${width}&q=75`;
+  return url;
 }
 
 export default function Home() {

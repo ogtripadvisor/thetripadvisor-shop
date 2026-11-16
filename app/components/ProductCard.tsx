@@ -20,6 +20,7 @@ export type Product = {
 
 type View = { key: string; label: string; url: string };
 // Sends photos through Next.js's image optimiser so they load much faster
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function optimised(url: string, width: number) {
   return `/_next/image?url=${encodeURIComponent(url)}&w=${width}&q=75`;
 }
