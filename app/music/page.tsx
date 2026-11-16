@@ -12,7 +12,7 @@ const NOVA_VITA_URL = 'https://open.spotify.com/track/2U3a5qa3mhIImJhwSlLMM3?si=
 
 const ARTIST_SPOTIFY_URL = 'https://open.spotify.com/artist/0KXL7WvfCrx6WH76y20uJU';
 
-const ALBUM_TRACKS = ['S.W.R', 'Hurricane', 'Halloween Special'];
+const ALBUM_TRACKS = ['S.W.R', 'Nova Vita', 'Halloween Special'];
 
 // Turns a normal Spotify song link into the playable embed version
 function toSpotifyEmbed(url: string) {
